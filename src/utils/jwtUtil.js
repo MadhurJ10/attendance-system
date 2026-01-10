@@ -3,9 +3,11 @@ import config from "../config/environment.js"
 
 const JWT_SECRET = config.JWT_SECRET || "madhur";
 
-export const jwtToken = (id) => {
+export const jwtToken = (id , role) => {
   const token = jwt.sign(
-    { userId: id },
+    { userId: id ,
+      role : role
+    },
     JWT_SECRET
   );
 

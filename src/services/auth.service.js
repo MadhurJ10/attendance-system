@@ -15,6 +15,7 @@ class AuthService {
     const user = await userModel.create({
       email: data.email,
       password: hashedPassword,
+      role: data.role,
     });
 
     return user;
@@ -33,7 +34,7 @@ class AuthService {
       throw new Error("Wrong password");
     }
 
-    const token = jwtToken(check._id);
+    const token = jwtToken(check._id, check.role);
     return token;
   }
 }
