@@ -25,4 +25,7 @@ route.get('/all-student' , authMiddleware , teacherOnly  , classController.getSt
 route.get('/:id' , authMiddleware , classController.getClass) // get detail about specific class
 
 
+route.post('/start' , authMiddleware , teacherOnly , classController.start);
+
+
 export default route;

@@ -72,6 +72,11 @@ class ClassService {
         return data;
     }
 
+    async start(classId , teacherId){
+        const result = await this.getClass(classId , teacherId);
+        return result;
+    }
+
 }
 
 

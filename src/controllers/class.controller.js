@@ -1,5 +1,5 @@
 import ClassService from "../services/class.service.js";
-
+import { setActiveSession } from "../utils/activeSession.js";
 
 
 class ClassController {
@@ -99,6 +99,37 @@ class ClassController {
             });
         }
     }
+
+    start = async (req, res) => {
+        try {
+            const { classId } = req.body;
+            const teacherId = req.user.userId;
+
+            await this.classService.start(classId, teacherId);
+
+            const startedAt = new Date().toISOString();
+
+            setActiveSession({
+                classId,
+                startedAt,
+                attendance: {}
+            });
+
+            return res.status(200).json({
+                success: true,
+                data: {
+                    classId,
+                    startedAt
+                }
+            });
+
+        } catch (error) {
+            return res.status(500).json({
+                success: false,
+                error: error.message
+            });
+        }
+    };
 
 }
 
